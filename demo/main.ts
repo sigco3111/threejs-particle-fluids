@@ -19,13 +19,13 @@ app.innerHTML = `
       <a class="brand" href="./" aria-label="Three.js Particle Fluids home"><img src="${import.meta.env.BASE_URL}favicon.svg" alt="" width="34" height="34"><span>Three.js <strong>Particle Fluids</strong></span></a>
       <a class="version" href="${REPO}/releases/tag/v${version}" target="_blank" rel="noopener" aria-label="Version ${version} release notes">v${version}</a>
     </div>
-    <nav class="top-links" aria-label="Project links">
-      <a class="top-link" href="${REPO}/tree/main/docs#readme" target="_blank" rel="noopener">${icon('book')}<span>Docs</span></a>
+    <nav class="top-links" aria-label="프로젝트 링크">
+      <a class="top-link" href="${REPO}/tree/main/docs#readme" target="_blank" rel="noopener">${icon('book')}<span>문서</span></a>
       <a class="top-link" href="${REPO}" target="_blank" rel="noopener">${icon('github')}<span>GitHub</span></a>
     </nav>
   </header>
   <main class="workspace">
-  <nav class="gallery" aria-label="Choose a preset">${[...new Set(presets.map((p) => p.group))]
+  <nav class="gallery" aria-label="프리셋 선택">${[...new Set(presets.map((p) => p.group))]
     .map(
       (group) => `
     <section class="preset-group"><h2 class="eyebrow">${group}</h2><div class="preset-grid">${presets
@@ -40,46 +40,46 @@ app.innerHTML = `
       .join('')}</div></section>`,
     )
     .join('')}</nav>
-    <section class="viewport" aria-label="Simulation viewport">
+    <section class="viewport" aria-label="시뮬레이션 화면">
       <div id="canvas-host"></div>
-      <aside class="diagnostics" aria-label="Live performance diagnostics">
-        <div class="diagnostic-heading"><span class="live-dot"></span><span id="sim-state">INITIALIZING</span></div>
-        <dl><div><dt>FPS</dt><dd id="fps">—</dd></div><div><dt>Frame</dt><dd><span id="frame-ms">—</span><small>ms</small></dd></div><div><dt>Particles</dt><dd id="particle-count">—</dd></div></dl>
-        <div class="diagnostic-foot"><span id="solver-info">GPU COMPUTE</span><span id="sim-time">0.0 s</span></div>
+      <aside class="diagnostics" aria-label="실시간 성능 정보">
+        <div class="diagnostic-heading"><span class="live-dot"></span><span id="sim-state">준비 중</span></div>
+        <dl><div><dt>FPS</dt><dd id="fps">—</dd></div><div><dt>프레임</dt><dd><span id="frame-ms">—</span><small>ms</small></dd></div><div><dt>입자</dt><dd id="particle-count">—</dd></div></dl>
+        <div class="diagnostic-foot"><span id="solver-info">GPU 연산</span><span id="sim-time">0.0 s</span></div>
       </aside>
-      <label class="particle-level"><span>Particles</span><select id="particle-level" aria-label="Particle count">${PARTICLE_LEVELS.map(
+      <label class="particle-level"><span>입자</span><select id="particle-level" aria-label="입자 수">${PARTICLE_LEVELS.map(
         (level) =>
           `<option value="${level.id}"${level.id === 'medium' ? ' selected' : ''}>${level.label} · ${level.count.toLocaleString('en-US')}</option>`,
       ).join('')}</select></label>
       <div class="scene-label"><span id="scene-category"></span><h1 id="scene-name"></h1></div>
-      <div id="loading" class="loading" role="status"><span class="spinner"></span><strong id="loading-title">Preparing the simulation</strong><span id="loading-copy">Compiling the first frame…</span></div>
-      <div id="error" class="error-card" hidden role="alert"><span class="eyebrow">GRAPHICS UNAVAILABLE</span><h2>WebGPU unavailable</h2><p id="error-copy"></p><p>Use a browser with WebGPU and hardware acceleration enabled. Open this demo on localhost or HTTPS.</p><button id="retry" class="primary">Try again ${icon('reset')}</button></div>
+      <div id="loading" class="loading" role="status"><span class="spinner"></span><strong id="loading-title">시뮬레이션 준비 중</strong><span id="loading-copy">첫 프레임을 컴파일하는 중…</span></div>
+      <div id="error" class="error-card" hidden role="alert"><span class="eyebrow">그래픽 사용 불가</span><h2>WebGPU를 사용할 수 없습니다</h2><p id="error-copy"></p><p>WebGPU와 하드웨어 가속이 켜진 브라우저를 사용하세요. 이 데모는 localhost 또는 HTTPS 환경에서 여세요.</p><button id="retry" class="primary">다시 시도 ${icon('reset')}</button></div>
       <div class="viewport-bottom">
-        <div class="camera-hint" id="interaction-hint">Drag to orbit · Scroll to zoom</div>
-        <div class="transport" aria-label="Playback controls">
-          <button id="play" class="play-button" title="Pause (Space)" aria-label="Pause simulation">${icon('pause')}</button>
-          <button id="restart" class="icon-button" title="Restart (R)" aria-label="Restart simulation">${icon('reset')}</button>
+        <div class="camera-hint" id="interaction-hint">드래그해 회전 · 스크롤해 확대</div>
+        <div class="transport" aria-label="재생 컨트롤">
+          <button id="play" class="play-button" title="일시정지 (Space)" aria-label="시뮬레이션 일시정지">${icon('pause')}</button>
+          <button id="restart" class="icon-button" title="다시 시작 (R)" aria-label="시뮬레이션 다시 시작">${icon('reset')}</button>
           <span class="toolbar-divider"></span>
-          <button id="camera-reset" class="icon-button" title="Reset camera" aria-label="Reset camera">${icon('orbit')}</button>
-          <button id="capture" class="icon-button" title="Save image" aria-label="Save image">${icon('camera')}</button>
+          <button id="camera-reset" class="icon-button" title="카메라 초기화" aria-label="카메라 초기화">${icon('orbit')}</button>
+          <button id="capture" class="icon-button" title="이미지 저장" aria-label="이미지 저장">${icon('camera')}</button>
         </div>
-        <button id="mobile-controls" class="mobile-controls" aria-controls="inspector" aria-expanded="false">${icon('tune')} Parameters</button>
+        <button id="mobile-controls" class="mobile-controls" aria-controls="inspector" aria-expanded="false">${icon('tune')} 매개변수</button>
       </div>
     </section>
-    <aside class="inspector" id="inspector" aria-label="Preset parameters">
-      <div class="inspector-top"><span class="eyebrow">PRESET</span><button id="close-controls" class="icon-button" aria-label="Close parameters">${icon('close')}</button><span id="preset-index"></span></div>
+    <aside class="inspector" id="inspector" aria-label="프리셋 매개변수">
+      <div class="inspector-top"><span class="eyebrow">프리셋</span><button id="close-controls" class="icon-button" aria-label="매개변수 닫기">${icon('close')}</button><span id="preset-index"></span></div>
       <h2 id="panel-name"></h2><p id="description" class="description"></p>
-      <div class="section-label"><span>PARAMETERS</span><button id="defaults" class="text-button">Reset all</button></div>
+      <div class="section-label"><span>매개변수</span><button id="defaults" class="text-button">모두 초기화</button></div>
       <div id="parameters"></div>
-      <p class="parameter-note" id="parameter-note">Changes apply in real time.</p>
+      <p class="parameter-note" id="parameter-note">변경 사항이 실시간으로 적용됩니다.</p>
       <div class="render-settings">
-        <div class="section-label"><span>APPEARANCE</span></div>
-        <fieldset class="segmented"><legend class="sr-only">Render mode</legend><label><input type="radio" name="render-mode" value="surface" checked><span>Surface</span></label><label><input type="radio" name="render-mode" value="particles"><span>Particles</span></label></fieldset>
-        <label class="setting-row switch-row" for="reflections"><span>Reflections</span><input type="checkbox" id="reflections" checked><span class="switch" aria-hidden="true"></span></label>
-        <label class="setting-row switch-row" for="ambient-occlusion"><span>Ambient occlusion</span><input type="checkbox" id="ambient-occlusion" checked><span class="switch" aria-hidden="true"></span></label>
-        <label class="setting-row switch-row" for="loop"><span>Loop experiment</span><input type="checkbox" id="loop"><span class="switch" aria-hidden="true"></span></label>
-        <div class="section-label"><span>ADVANCED</span></div>
-        <div class="setting-row"><label for="substeps" title="Solver substeps per frame. Auto scales with the particle count so finer particles stay stable.">Substeps</label><select id="substeps"><option value="auto">Auto</option>${Array.from(
+        <div class="section-label"><span>표시 설정</span></div>
+        <fieldset class="segmented"><legend class="sr-only">렌더 모드</legend><label><input type="radio" name="render-mode" value="surface" checked><span>표면</span></label><label><input type="radio" name="render-mode" value="particles"><span>입자</span></label></fieldset>
+        <label class="setting-row switch-row" for="reflections"><span>반사</span><input type="checkbox" id="reflections" checked><span class="switch" aria-hidden="true"></span></label>
+        <label class="setting-row switch-row" for="ambient-occlusion"><span>앰비언트 오클루전</span><input type="checkbox" id="ambient-occlusion" checked><span class="switch" aria-hidden="true"></span></label>
+        <label class="setting-row switch-row" for="loop"><span>실험 반복</span><input type="checkbox" id="loop"><span class="switch" aria-hidden="true"></span></label>
+        <div class="section-label"><span>고급 설정</span></div>
+        <div class="setting-row"><label for="substeps" title="프레임당 솔버 서브스텝 수입니다. 자동은 입자 수에 맞춰 조절되어 입자가 작아져도 안정적입니다.">서브스텝</label><select id="substeps"><option value="auto">자동</option>${Array.from(
           { length: 16 },
           (_, i) => `<option value="${i + 1}">${i + 1}</option>`,
         ).join('')}</select></div>
@@ -122,8 +122,8 @@ function toast(message: string): void {
 
 function syncPlayback(): void {
   el('play').innerHTML = icon(playing ? 'pause' : 'play');
-  el('play').setAttribute('aria-label', playing ? 'Pause simulation' : 'Play simulation');
-  el('play').title = `${playing ? 'Pause' : 'Play'} (Space)`;
+  el('play').setAttribute('aria-label', playing ? '시뮬레이션 일시정지' : '시뮬레이션 재생');
+  el('play').title = `${playing ? '일시정지' : '재생'} (Space)`;
   if (world) world.playing = playing;
 }
 
@@ -132,12 +132,12 @@ function stats(data: Diagnostics): void {
   el('frame-ms').textContent = data.frameMs.toFixed(1);
   el('particle-count').textContent = data.particles.toLocaleString();
   el('sim-time').textContent = `${data.time.toFixed(1)} s`;
-  el('solver-info').textContent = `${data.substeps} SUBSTEPS · ${data.iterations} ITERATIONS`;
+  el('solver-info').textContent = `${data.substeps} 서브스텝 · ${data.iterations} 반복`;
   el('sim-state').textContent = playing
     ? data.limited
-      ? 'RUNNING · GPU LIMITED'
-      : 'RUNNING'
-    : 'PAUSED';
+      ? '실행 중 · GPU 한계'
+      : '실행 중'
+    : '일시정지';
   document.body.classList.toggle('paused', !playing);
 }
 
@@ -145,9 +145,9 @@ function showError(error: unknown): void {
   loading = false;
   el('loading').hidden = true;
   el('error').hidden = false;
-  el('sim-state').textContent = 'UNAVAILABLE';
+  el('sim-state').textContent = '사용 불가';
   el('error-copy').textContent =
-    error instanceof Error ? error.message : 'The simulation could not start.';
+    error instanceof Error ? error.message : '시뮬레이션을 시작할 수 없습니다.';
   console.error(error);
 }
 
@@ -167,9 +167,9 @@ function rebuild(preserveCamera = true): void {
   const camera = preserveCamera ? world?.cameraState() : undefined;
   setBusy(true);
   el('error').hidden = true;
-  el('loading-title').textContent = `Preparing ${preset.name.toLowerCase()}`;
-  el('loading-copy').textContent = 'Building particles and compiling shaders…';
-  el('sim-state').textContent = 'INITIALIZING';
+  el('loading-title').textContent = `${preset.name} 준비 중`;
+  el('loading-copy').textContent = '입자를 만들고 셰이더를 컴파일하는 중…';
+  el('sim-state').textContent = '준비 중';
   queue = queue
     .then(async () => {
       if (token !== generation) return;
@@ -206,14 +206,14 @@ function rebuild(preserveCamera = true): void {
         next.looping = looping;
         next.ambientOcclusion = ambientOcclusion;
         el('substeps').querySelector('option[value="auto"]')!.textContent =
-          `Auto (${next.experiment.substeps})`;
+          `자동 (${next.experiment.substeps})`;
         if (substepOverride !== null) next.experiment.loop.substeps = substepOverride;
         next.experiment.setParticleView?.(particleView);
         next.experiment.setReflections?.(reflections);
         host.replaceChildren(next.canvas);
         el('interaction-hint').textContent = next.experiment.interact
-          ? 'Click the liquid to splash · Drag to orbit · Scroll to zoom'
-          : 'Drag to orbit · Scroll to zoom';
+          ? '액체를 클릭해 튀기기 · 드래그해 회전 · 스크롤해 확대'
+          : '드래그해 회전 · 스크롤해 확대';
         setBusy(false);
         syncPlayback();
         next.start();
@@ -234,14 +234,14 @@ function renderParameters(): void {
   el('parameters').innerHTML = selected.controls
     .map(
       (control) => `
-    <div class="parameter"><div class="parameter-label"><label for="control-${control.key}">${control.label}${control.restart ? '<span class="restart-mark" title="Restarts the experiment">↻</span>' : ''}</label><output id="value-${control.key}" for="control-${control.key}">${format(values[control.key]!, control.step)}${control.unit ? `<small>${control.unit}</small>` : ''}</output></div>
+    <div class="parameter"><div class="parameter-label"><label for="control-${control.key}">${control.label}${control.restart ? '<span class="restart-mark" title="실험을 다시 시작합니다">↻</span>' : ''}</label><output id="value-${control.key}" for="control-${control.key}">${format(values[control.key]!, control.step)}${control.unit ? `<small>${control.unit}</small>` : ''}</output></div>
       <input type="range" id="control-${control.key}" min="${control.min}" max="${control.max}" step="${control.step}" value="${values[control.key]}" aria-describedby="help-${control.key}" style="--fill:${((values[control.key]! - control.min) / (control.max - control.min)) * 100}%">
-      <p class="parameter-help" id="help-${control.key}">${control.description}${control.restart ? ' Restarts the experiment.' : ''}</p></div>`,
+      <p class="parameter-help" id="help-${control.key}">${control.description}${control.restart ? ' 변경 시 실험이 다시 시작됩니다.' : ''}</p></div>`,
     )
     .join('');
   el('parameter-note').textContent = selected.controls.some((control) => control.restart)
-    ? 'Live controls · ↻ restarts the experiment'
-    : 'Changes apply in real time.';
+    ? '실시간 조절 · ↻ 변경 시 실험 다시 시작'
+    : '변경 사항이 실시간으로 적용됩니다.';
   for (const control of selected.controls) {
     const input = el<HTMLInputElement>(`control-${control.key}`);
     input.addEventListener('input', () => {
@@ -366,9 +366,9 @@ el('capture').addEventListener('click', async () => {
     link.download = `${selected.id}.png`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-    toast('Image saved');
+    toast('이미지를 저장했습니다');
   } catch {
-    toast('Image could not be saved. Please try again.');
+    toast('이미지를 저장할 수 없습니다. 다시 시도해 주세요.');
   } finally {
     button.disabled = false;
   }
