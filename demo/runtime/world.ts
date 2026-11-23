@@ -231,9 +231,7 @@ export class World {
     const backend = this.renderer.backend as unknown as { device?: GPUDevice };
     void backend.device?.lost.then((info) => {
       if (!this.stopped && info.reason !== 'destroyed')
-        this.onError(
-          new Error('그래픽 장치가 중단되었습니다. 프리셋을 다시 불러와 계속하세요.'),
-        );
+        this.onError(new Error('그래픽 장치가 중단되었습니다. 프리셋을 다시 불러와 계속하세요.'));
     });
   }
 
