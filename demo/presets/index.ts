@@ -102,8 +102,7 @@ export const presets: readonly Preset[] = [
     name: '댐 붕괴',
     category: '범람·장애물',
     group: '액체',
-    description:
-      '20cm 높이의 물기둥이 무너져 수조를 범람시키고 커다란 스탠퍼드 버니에 부딪힙니다.',
+    description: '20cm 높이의 물기둥이 무너져 수조를 범람시키고 커다란 스탠퍼드 버니에 부딪힙니다.',
     accent: '#7fb8e0',
     camera: [2.2, 1.7, 2.6],
     target: [0, 0.3, 0],
@@ -167,8 +166,7 @@ export const presets: readonly Preset[] = [
       {
         key: 'viscosity',
         label: '점성',
-        description:
-          '암묵적 확산이 높은 점성에서도 불안정해지지 않으면서 전단에 저항합니다.',
+        description: '암묵적 확산이 높은 점성에서도 불안정해지지 않으면서 전단에 저항합니다.',
         min: 0.1,
         max: 30,
         step: 0.5,
@@ -193,8 +191,7 @@ export const presets: readonly Preset[] = [
     name: '부력',
     category: '유체·고체',
     group: '액체',
-    description:
-      '고무 오리가 맑은 물 위에 둥둥 뜹니다. 밀도를 바꿔 뜨기와 가라앉기를 살펴보세요.',
+    description: '고무 오리가 맑은 물 위에 둥둥 뜹니다. 밀도를 바꿔 뜨기와 가라앉기를 살펴보세요.',
     accent: '#96d7c3',
     camera: [1.95, 1.5, 2.8],
     target: [0, 0.35, 0],
@@ -280,7 +277,8 @@ export const presets: readonly Preset[] = [
       {
         key: 'softness',
         label: '부드러움',
-        description: '모든 토끼를 함께 조절합니다. 오른쪽 토끼일수록 왼쪽보다 두 배씩 더 부드럽습니다.',
+        description:
+          '모든 토끼를 함께 조절합니다. 오른쪽 토끼일수록 왼쪽보다 두 배씩 더 부드럽습니다.',
         min: 0.1,
         max: 2,
         step: 0.05,
@@ -381,8 +379,7 @@ export const presets: readonly Preset[] = [
     name: '벨벳 드레이프',
     category: '천·충돌',
     group: '천',
-    description:
-      '붉은 벨벳 천이 스탠퍼드 버니 위로 떨어져 몸을 감싸며 주름을 만듭니다.',
+    description: '붉은 벨벳 천이 스탠퍼드 버니 위로 떨어져 몸을 감싸며 주름을 만듭니다.',
     accent: '#e3a3ae',
     camera: [1.2, 0.95, 1.6],
     target: [0, 0.2, 0],
@@ -478,7 +475,8 @@ export const presets: readonly Preset[] = [
       {
         key: 'heat',
         label: '열',
-        description: '환기구가 공기를 데우는 강도입니다. 뜨거운 공기는 올라가며 연기를 실어 나릅니다.',
+        description:
+          '환기구가 공기를 데우는 강도입니다. 뜨거운 공기는 올라가며 연기를 실어 나릅니다.',
         min: 0,
         max: 8,
         step: 0.1,
