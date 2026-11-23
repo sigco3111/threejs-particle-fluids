@@ -25,8 +25,8 @@ export async function createParticleRenderer(
   if ((renderer.backend as { isWebGPUBackend?: boolean }).isWebGPUBackend !== true) {
     renderer.dispose();
     throw new Error(
-      'createParticleRenderer: WebGPU is unavailable, and this library has no WebGL fallback. ' +
-        'Use a browser with WebGPU enabled (on Linux Chromium, pass --enable-unsafe-webgpu).',
+      'createParticleRenderer: WebGPU를 사용할 수 없으며 이 라이브러리는 WebGL 대체를 지원하지 않습니다. ' +
+        'WebGPU가 활성화된 브라우저를 사용하세요(Linux Chromium에서는 --enable-unsafe-webgpu 전달).',
     );
   }
   return renderer;
