@@ -11,8 +11,8 @@ import { buildTarp } from './tarp.js';
 
 const gravity = (value = 9.81): Control => ({
   key: 'gravity',
-  label: 'Gravity',
-  description: 'Downward acceleration.',
+  label: '중력',
+  description: '아래 방향으로 가속하는 힘입니다.',
   min: 0,
   max: 15,
   step: 0.1,
@@ -21,8 +21,8 @@ const gravity = (value = 9.81): Control => ({
 });
 const viscosity = (value = 0.06): Control => ({
   key: 'viscosity',
-  label: 'Viscosity',
-  description: 'How strongly neighboring particles resist flowing past each other.',
+  label: '점성',
+  description: '이웃 입자들이 서로를 지나쳐 흐르는 것에 저항하는 정도입니다.',
   min: 0.005,
   max: 0.3,
   step: 0.005,
@@ -30,8 +30,8 @@ const viscosity = (value = 0.06): Control => ({
 });
 const tension = (value = 0.12): Control => ({
   key: 'tension',
-  label: 'Surface tension',
-  description: 'Pulls the liquid together into smooth drops and sheets.',
+  label: '표면 장력',
+  description: '액체를 매끄러운 방울과 막 형태로 끌어모읍니다.',
   min: 0,
   max: 0.28,
   step: 0.01,
@@ -42,11 +42,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'wave-chamber',
     number: '01',
-    name: 'Wave Chamber',
-    category: 'FLUID DYNAMICS',
-    group: 'Liquids',
+    name: '파동 수조',
+    category: '유체 역학',
+    group: '액체',
     description:
-      'A sealed tank turns slowly end over end, sending water over and under alternating walls.',
+      '밀폐된 수조가 천천히 끝에서 끝으로 뒤집히며, 물이 번갈아 나오는 벽 위아래로 출렁입니다.',
     accent: '#74c9df',
     camera: [2.2, 2.0, 3.1],
     target: [0, 0.9, 0],
@@ -57,8 +57,8 @@ export const presets: readonly Preset[] = [
       tension(),
       {
         key: 'speed',
-        label: 'Rotation speed',
-        description: 'How quickly the tank turns end over end.',
+        label: '회전 속도',
+        description: '수조가 뒤집히는 속도입니다.',
         min: 0,
         max: 1.5,
         step: 0.05,
@@ -70,10 +70,10 @@ export const presets: readonly Preset[] = [
   {
     id: 'crown-impact',
     number: '02',
-    name: 'Water Drop',
-    category: 'SPLASH & COLLISION',
-    group: 'Liquids',
-    description: 'A falling drop splashes into a shallow pool.',
+    name: '물방울',
+    category: '물튀김·충돌',
+    group: '액체',
+    description: '떨어지는 물방울이 얕은 물웅덩이에 튀어 오릅니다.',
     accent: '#9daaf4',
     camera: [1.85, 1.65, 2.5],
     target: [0, 0.35, 0],
@@ -84,8 +84,8 @@ export const presets: readonly Preset[] = [
       tension(0.16),
       {
         key: 'height',
-        label: 'Drop height',
-        description: 'Raises the starting position of the drop.',
+        label: '낙하 높이',
+        description: '물방울의 시작 위치를 높입니다.',
         min: 0.65,
         max: 1.4,
         step: 0.05,
@@ -99,11 +99,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'dam-break',
     number: '03',
-    name: 'Dam Break',
-    category: 'FLOOD & OBSTACLE',
-    group: 'Liquids',
+    name: '댐 붕괴',
+    category: '범람·장애물',
+    group: '액체',
     description:
-      'A column of water drops from 20 cm up, collapses, and floods the tank, crashing into a large Stanford bunny.',
+      '20cm 높이의 물기둥이 무너져 수조를 범람시키고 커다란 스탠퍼드 버니에 부딪힙니다.',
     accent: '#7fb8e0',
     camera: [2.2, 1.7, 2.6],
     target: [0, 0.3, 0],
@@ -114,8 +114,8 @@ export const presets: readonly Preset[] = [
       tension(0.08),
       {
         key: 'height',
-        label: 'Water height',
-        description: 'Height of the water column, which starts 20 cm above the floor.',
+        label: '물 높이',
+        description: '바닥에서 20cm 위에서 시작하는 물기둥의 높이입니다.',
         min: 0.3,
         max: 0.9,
         step: 0.05,
@@ -129,11 +129,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'liquid-marble',
     number: '04',
-    name: 'Liquid Marble',
-    category: 'SURFACE TENSION',
-    group: 'Liquids',
+    name: '액체 구슬',
+    category: '표면 장력',
+    group: '액체',
     description:
-      'Gravity pulls inward. Click the drop to burst it from the center and watch it pull back together.',
+      '중력이 안쪽을 향합니다. 방울을 클릭하면 중심에서 터지고, 다시 하나로 뭉쳐지는 모습을 볼 수 있습니다.',
     accent: '#ccd5e0',
     camera: [1.25, 0.85, 1.65],
     target: [0, 0.5, 0],
@@ -141,8 +141,8 @@ export const presets: readonly Preset[] = [
     controls: [
       {
         ...gravity(2.5),
-        label: 'Inward gravity',
-        description: 'Attraction toward the center of the drop.',
+        label: '중심 방향 중력',
+        description: '방울 중심을 향하는 인력입니다.',
         max: 8,
       },
       tension(0.12),
@@ -153,11 +153,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'viscous-pour',
     number: '05',
-    name: 'Honey Bunny',
-    category: 'VISCOSITY',
-    group: 'Liquids',
+    name: '허니 버니',
+    category: '점성',
+    group: '액체',
     description:
-      'A circling nozzle drizzles thick honey over the Stanford bunny, coating it and piling up. Lower viscosity to compare with free flow.',
+      '원을 그리며 도는 노즐이 스탠퍼드 버니 위로 걸쭉한 꿀을 뿌려 코팅하고 쌓아 올립니다. 점성을 낮추면 자유로운 흐름과 비교할 수 있습니다.',
     accent: '#eac08e',
     camera: [1.05, 0.85, 1.55],
     target: [0, 0.25, 0],
@@ -166,9 +166,9 @@ export const presets: readonly Preset[] = [
       gravity(9.8),
       {
         key: 'viscosity',
-        label: 'Viscosity',
+        label: '점성',
         description:
-          'Implicit diffusion resists shear without becoming unstable at high viscosity.',
+          '암묵적 확산이 높은 점성에서도 불안정해지지 않으면서 전단에 저항합니다.',
         min: 0.1,
         max: 30,
         step: 0.5,
@@ -177,8 +177,8 @@ export const presets: readonly Preset[] = [
       tension(0.015),
       {
         key: 'friction',
-        label: 'Bunny friction',
-        description: 'How strongly honey grips the bunny. Low values let it slide off.',
+        label: '토끼 마찰',
+        description: '꿀이 토끼를 붙잡는 정도입니다. 낮으면 미끄러져 흘러내립니다.',
         min: 0,
         max: 2,
         step: 0.05,
@@ -190,11 +190,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'buoyancy',
     number: '06',
-    name: 'Buoyancy',
-    category: 'FLUID & SOLID',
-    group: 'Liquids',
+    name: '부력',
+    category: '유체·고체',
+    group: '액체',
     description:
-      'Rubber ducks bob in clear water. Change their density to explore floating and sinking.',
+      '고무 오리가 맑은 물 위에 둥둥 뜹니다. 밀도를 바꿔 뜨기와 가라앉기를 살펴보세요.',
     accent: '#96d7c3',
     camera: [1.95, 1.5, 2.8],
     target: [0, 0.35, 0],
@@ -203,8 +203,8 @@ export const presets: readonly Preset[] = [
       gravity(5),
       {
         key: 'density',
-        label: 'Relative density',
-        description: 'Object density relative to water. Below 1 floats; above 1 sinks.',
+        label: '상대 밀도',
+        description: '물에 대한 물체의 밀도입니다. 1보다 작으면 뜨고, 크면 가라앉습니다.',
         min: 0.15,
         max: 2,
         step: 0.05,
@@ -219,11 +219,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'elastic-studies',
     number: '07',
-    name: 'Soft Body Squeeze',
-    category: 'SOFT BODIES',
-    group: 'Soft Body',
+    name: '소프트 바디 압착',
+    category: '소프트 바디',
+    group: '소프트 바디',
     description:
-      '20 soft forms with holes, curves, and limbs. Moving plates reveal bending, folding, and elastic recovery.',
+      '구멍과 곡선, 팔다리가 있는 부드러운 형체 20개. 움직이는 판이 휘어짐, 접힘, 탄성 회복을 보여줍니다.',
     accent: '#db9fb2',
     camera: [1.5, 2.2, 3.1],
     target: [0, 0.35, 0],
@@ -232,8 +232,8 @@ export const presets: readonly Preset[] = [
       gravity(6),
       {
         key: 'compression',
-        label: 'Compression',
-        description: 'How far the plates squeeze the forms. Set to zero to release them.',
+        label: '압축',
+        description: '판이 형체를 누르는 정도입니다. 0으로 설정하면 놓아줍니다.',
         min: 0,
         max: 1,
         step: 0.05,
@@ -241,8 +241,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'softness',
-        label: 'Softness',
-        description: 'Allows the forms to compress under their own weight.',
+        label: '부드러움',
+        description: '형체가 자기 무게에 눌려 찌그러지도록 합니다.',
         min: 0,
         max: 1,
         step: 0.05,
@@ -255,11 +255,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'bunny-lineup',
     number: '08',
-    name: 'Bunny Lineup',
-    category: 'SOFT BODIES',
-    group: 'Soft Body',
+    name: '버니 라인업',
+    category: '소프트 바디',
+    group: '소프트 바디',
     description:
-      'Five jelly bunnies drop side by side, from firm rubber on the left to loose jelly on the right.',
+      '다섯 마리의 젤리 토끼가 나란히 떨어집니다. 왼쪽은 단단한 고무이고 오른쪽으로 갈수록 말랑한 젤리가 됩니다.',
     accent: '#e8859b',
     camera: [0, 0.75, 3.3],
     target: [0, 0.22, 0],
@@ -268,8 +268,8 @@ export const presets: readonly Preset[] = [
       gravity(9.8),
       {
         key: 'height',
-        label: 'Drop height',
-        description: 'Lifts the bunnies before they fall.',
+        label: '낙하 높이',
+        description: '토끼를 떨어뜨리기 전에 들어 올립니다.',
         min: 0.05,
         max: 1.2,
         step: 0.05,
@@ -279,8 +279,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'softness',
-        label: 'Softness',
-        description: 'Scales every bunny together. Each is twice as soft as the one to its left.',
+        label: '부드러움',
+        description: '모든 토끼를 함께 조절합니다. 오른쪽 토끼일수록 왼쪽보다 두 배씩 더 부드럽습니다.',
         min: 0.1,
         max: 2,
         step: 0.05,
@@ -294,11 +294,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'banana-blender',
     number: '09',
-    name: 'Banana Blender',
-    category: 'SOFT BODIES',
-    group: 'Soft Body',
+    name: '바나나 블렌더',
+    category: '소프트 바디',
+    group: '소프트 바디',
     description:
-      'Eight soft bananas, as dense as the liquid around them, swirl past a tall spinning paddle.',
+      '주변 액체와 밀도가 같은 부드러운 바나나 여덟 개가 커다란 회전 패들에 휘말려 돌아갑니다.',
     accent: '#f2d16b',
     camera: [1.7, 1.6, 2.3],
     target: [0, 0.65, 0],
@@ -308,8 +308,8 @@ export const presets: readonly Preset[] = [
       viscosity(0.06),
       {
         key: 'rpm',
-        label: 'Paddle speed',
-        description: 'Rotation speed of the paddle.',
+        label: '패들 속도',
+        description: '패들의 회전 속도입니다.',
         min: 0,
         max: 240,
         step: 5,
@@ -318,8 +318,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'softness',
-        label: 'Softness',
-        description: 'Moves the bananas from firm to squishy.',
+        label: '부드러움',
+        description: '바나나를 단단한 것부터 말랑한 것까지 조절합니다.',
         min: 0,
         max: 1,
         step: 0.05,
@@ -332,11 +332,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'silk-in-motion',
     number: '10',
-    name: 'Velvet Curtain',
-    category: 'CLOTH & COLLISION',
-    group: 'Cloth',
+    name: '벨벳 커튼',
+    category: '천·충돌',
+    group: '천',
     description:
-      'A moving sphere pushes through soft red velvet, revealing folds and a grazing-angle sheen.',
+      '움직이는 구가 부드러운 붉은 벨벳을 밀고 지나가며 주름과 스치는 각도의 광택을 드러냅니다.',
     accent: '#cbbde8',
     camera: [1.9, 1.35, 2.7],
     target: [0, 0.85, 0],
@@ -344,8 +344,8 @@ export const presets: readonly Preset[] = [
     controls: [
       {
         key: 'wind',
-        label: 'Wind speed',
-        description: 'Pushes air across the fabric.',
+        label: '바람 속도',
+        description: '천 표면을 따라 공기를 밀어냅니다.',
         min: 0,
         max: 6,
         step: 0.1,
@@ -354,8 +354,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'speed',
-        label: 'Sphere speed',
-        description: 'Moves the sphere back and forth through the fabric.',
+        label: '구 속도',
+        description: '구가 천을 앞뒤로 오가는 속도입니다.',
         min: 0.2,
         max: 2,
         step: 0.1,
@@ -363,8 +363,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'bend',
-        label: 'Drape softness',
-        description: 'Moves from firm fabric to loose silk. Changes apply immediately.',
+        label: '드레이프 부드러움',
+        description: '단단한 천에서 늘어지는 실크까지 조절합니다. 변경 사항은 즉시 적용됩니다.',
         min: 0,
         max: 1,
         step: 0.05,
@@ -378,11 +378,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'velvet-drape',
     number: '11',
-    name: 'Velvet Drape',
-    category: 'CLOTH & COLLISION',
-    group: 'Cloth',
+    name: '벨벳 드레이프',
+    category: '천·충돌',
+    group: '천',
     description:
-      'A square of red velvet drops onto the Stanford bunny and settles into folds around it.',
+      '붉은 벨벳 천이 스탠퍼드 버니 위로 떨어져 몸을 감싸며 주름을 만듭니다.',
     accent: '#e3a3ae',
     camera: [1.2, 0.95, 1.6],
     target: [0, 0.2, 0],
@@ -391,8 +391,8 @@ export const presets: readonly Preset[] = [
       gravity(6),
       {
         key: 'height',
-        label: 'Drop height',
-        description: 'Raises the cloth before it falls.',
+        label: '낙하 높이',
+        description: '천을 떨어뜨리기 전에 들어 올립니다.',
         min: 0.5,
         max: 1.2,
         step: 0.05,
@@ -402,8 +402,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'bend',
-        label: 'Drape softness',
-        description: 'Moves from firm fabric to loose silk. Changes apply immediately.',
+        label: '드레이프 부드러움',
+        description: '단단한 천에서 늘어지는 실크까지 조절합니다. 변경 사항은 즉시 적용됩니다.',
         min: 0,
         max: 1,
         step: 0.05,
@@ -411,8 +411,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'friction',
-        label: 'Bunny friction',
-        description: 'How strongly the cloth grips the bunny. Low values let it slide off.',
+        label: '토끼 마찰',
+        description: '천이 토끼를 붙잡는 정도입니다. 낮으면 미끄러져 흘러내립니다.',
         min: 0,
         max: 1.5,
         step: 0.05,
@@ -420,8 +420,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'damping',
-        label: 'Damping',
-        description: 'Calms ripples in stretched fabric so it settles sooner.',
+        label: '감쇠',
+        description: '늘어난 천의 잔물결을 가라앉혀 더 빨리 안정되게 합니다.',
         min: 0,
         max: 0.6,
         step: 0.02,
@@ -434,11 +434,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'tarp-runoff',
     number: '12',
-    name: 'Tarp Runoff',
-    category: 'CLOTH & FLUID',
-    group: 'Cloth',
+    name: '타프 유출',
+    category: '천·유체',
+    group: '천',
     description:
-      'Red liquid pours onto a yellow canvas tarp pinned to four posts, runs down its slope, and spills off the front edge.',
+      '붉은 액체가 네 개의 기둥에 고정된 노란 방수포 위로 쏟아져 경사를 따라 흘러내리고 앞 가장자리 밖으로 쏟아집니다.',
     accent: '#e0525c',
     camera: [1.75, 1.45, 2.05],
     target: [0, 0.5, 0],
@@ -446,8 +446,8 @@ export const presets: readonly Preset[] = [
     controls: [
       {
         key: 'slope',
-        label: 'Tarp slope',
-        description: 'How much higher the back posts are than the front ones.',
+        label: '타프 경사',
+        description: '뒤쪽 기둥이 앞쪽 기둥보다 얼마나 높은지 조절합니다.',
         min: 0.1,
         max: 0.45,
         step: 0.05,
@@ -465,11 +465,11 @@ export const presets: readonly Preset[] = [
   {
     id: 'vortex-plume',
     number: '13',
-    name: 'Vortex Plume',
-    category: 'GAS & ADVECTION',
-    group: 'Gases',
+    name: '소용돌이 연기 기둥',
+    category: '기체·이류',
+    group: '기체',
     description:
-      'A heated vent drives a buoyant, swirling plume through still air. Smoke rides the rising air and spreads when the plume stalls.',
+      '가열된 환기구가 고요한 공기 속에 부력을 가진 소용돌이 기둥을 만들어냅니다. 연기는 상승 기류를 타고 오르다가 기둥이 멈추면 퍼져 나갑니다.',
     accent: '#e7ad87',
     camera: [1.9, 1.4, 2.6],
     target: [0, 0.8, 0],
@@ -477,8 +477,8 @@ export const presets: readonly Preset[] = [
     controls: [
       {
         key: 'heat',
-        label: 'Heat',
-        description: 'How strongly the vent heats the air. Hot air rises and carries the smoke.',
+        label: '열',
+        description: '환기구가 공기를 데우는 강도입니다. 뜨거운 공기는 올라가며 연기를 실어 나릅니다.',
         min: 0,
         max: 8,
         step: 0.1,
@@ -487,9 +487,9 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'swirl',
-        label: 'Swirl',
+        label: '소용돌이',
         description:
-          'Spin the wall vanes give the air drawn into the plume. Too much flings it apart.',
+          '벽 날개가 기둥으로 빨려 들어오는 공기에 주는 회전입니다. 너무 크면 연기가 흩어집니다.',
         min: 0,
         max: 0.8,
         step: 0.05,
@@ -498,8 +498,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'emission',
-        label: 'Emission rate',
-        description: 'Smoke tracers released at the vent per second.',
+        label: '방출률',
+        description: '환기구에서 초당 방출되는 연기 입자 수입니다.',
         min: 1000,
         max: 7000,
         step: 250,
@@ -508,8 +508,8 @@ export const presets: readonly Preset[] = [
       },
       {
         key: 'density',
-        label: 'Smoke density',
-        description: 'Controls how much light the smoke absorbs and scatters.',
+        label: '연기 밀도',
+        description: '연기가 빛을 흡수하고 산란하는 정도를 조절합니다.',
         min: 0.2,
         max: 3,
         step: 0.1,
