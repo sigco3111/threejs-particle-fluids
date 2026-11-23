@@ -19,7 +19,7 @@ export interface Preset {
   name: string;
   category: string;
   /** Sidebar section the preset is listed under. */
-  group: 'Liquids' | 'Soft Body' | 'Cloth' | 'Gases';
+  group: '액체' | '소프트 바디' | '천' | '기체';
   description: string;
   accent: string;
   number: string;
@@ -33,11 +33,11 @@ export interface Preset {
 }
 /** Particle budgets offered in the viewport. Presets size their particles to match. */
 export const PARTICLE_LEVELS = [
-  { id: 'low', label: 'Low', count: 5000 },
-  { id: 'medium', label: 'Medium', count: 10000 },
-  { id: 'high', label: 'High', count: 15000 },
-  { id: 'ultra', label: 'Ultra', count: 25000 },
-  { id: 'max', label: 'Max', count: 50000 },
+  { id: 'low', label: '낮음', count: 5000 },
+  { id: 'medium', label: '보통', count: 10000 },
+  { id: 'high', label: '높음', count: 15000 },
+  { id: 'ultra', label: '매우 높음', count: 25000 },
+  { id: 'max', label: '최대', count: 50000 },
 ] as const;
 export type ParticleLevel = (typeof PARTICLE_LEVELS)[number]['id'];
 export function particleCount(preset: Preset, level: ParticleLevel): number {
