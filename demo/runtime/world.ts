@@ -76,7 +76,7 @@ export class World {
   ) {
     this.canvas.setAttribute(
       'aria-label',
-      `${preset.name} interactive 3D simulation. Drag to orbit, scroll to zoom.`,
+      `${preset.name} 인터랙티브 3D 시뮬레이션. 드래그해 회전하고 스크롤해 확대합니다.`,
     );
     this.canvas.tabIndex = 0;
   }
@@ -87,7 +87,7 @@ export class World {
     particles: number,
     cameraState?: CameraState,
   ): Promise<void> {
-    if (!navigator.gpu) throw new Error('WebGPU is unavailable in this browser.');
+    if (!navigator.gpu) throw new Error('이 브라우저에서는 WebGPU를 사용할 수 없습니다.');
     this.renderer = await createParticleRenderer({
       canvas: this.canvas,
       antialias: true,
@@ -232,7 +232,7 @@ export class World {
     void backend.device?.lost.then((info) => {
       if (!this.stopped && info.reason !== 'destroyed')
         this.onError(
-          new Error('The graphics device was interrupted. Reload the preset to continue.'),
+          new Error('그래픽 장치가 중단되었습니다. 프리셋을 다시 불러와 계속하세요.'),
         );
     });
   }
@@ -276,7 +276,7 @@ export class World {
       await new Promise<void>((done) =>
         this.canvas.toBlob((blob) => {
           if (blob) request.resolve(blob);
-          else request.reject(new Error('Image capture failed.'));
+          else request.reject(new Error('이미지 캡처에 실패했습니다.'));
           done();
         }, 'image/png'),
       );
@@ -339,8 +339,8 @@ export class World {
   }
 
   screenshot(): Promise<Blob> {
-    if (this.stopped) return Promise.reject(new Error('The scene is no longer active.'));
-    this.captureRequest?.reject(new Error('Another image capture was requested.'));
+    if (this.stopped) return Promise.reject(new Error('장면이 더 이상 활성 상태가 아닙니다.'));
+    this.captureRequest?.reject(new Error('다른 이미지 캡처가 요청되었습니다.'));
     return new Promise((resolve, reject) => {
       this.captureRequest = { resolve, reject };
     });
@@ -350,7 +350,7 @@ export class World {
     this.stopped = true;
     cancelAnimationFrame(this.frameId);
     await this.pending;
-    this.captureRequest?.reject(new Error('The scene changed before capture completed.'));
+    this.captureRequest?.reject(new Error('캡처가 완료되기 전에 장면이 바뀌었습니다.'));
     this.captureRequest = undefined;
     this.controls?.dispose();
     this.experiment?.dispose();
